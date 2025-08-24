@@ -1,0 +1,43 @@
+<h2>Parking Spots</h2>
+
+<h3>Add New Parking Spot</h3>
+<form (ngSubmit)="createParkingSpot()">
+  <label>Spot Number: <input [(ngModel)]="newParkingSpot.spotNumber" name="spotNumber" required></label>
+  <label>Vehicle Number: <input [(ngModel)]="newParkingSpot.vehicleNumber" name="vehicleNumber"></label>
+  <label>Occupied: <input type="checkbox" [(ngModel)]="newParkingSpot.occupied" name="occupied"></label>
+  <button type="submit">Add</button>
+</form>
+
+<h3>Parking Spot List</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Spot Number</th>
+      <th>Vehicle Number</th>
+      <th>Occupied</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let spot of parkingSpots">
+      <td>{{ spot.spotNumber }}</td>
+      <td>{{ spot.vehicleNumber }}</td>
+      <td>{{ spot.occupied }}</td>
+      <td>
+        <button (click)="selectParkingSpot(spot)">Edit</button>
+        <button (click)="deleteParkingSpot(spot.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="selectedParkingSpot">
+  <h3>Edit Parking Spot</h3>
+  <form (ngSubmit)="updateParkingSpot()">
+    <label>Spot Number: <input [(ngModel)]="selectedParkingSpot.spotNumber" name="editSpotNumber" required></label>
+    <label>Vehicle Number: <input [(ngModel)]="selectedParkingSpot.vehicleNumber" name="editVehicleNumber"></label>
+    <label>Occupied: <input type="checkbox" [(ngModel)]="selectedParkingSpot.occupied" name="editOccupied"></label>
+    <button type="submit">Update</button>
+    <button (click)="selectedParkingSpot = null">Cancel</button>
+  </form>
+</div>
