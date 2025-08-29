@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.11 on linux)" generated="2025-08-29T01:14:56.947301" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/app/tests">
+<suite id="s1-s1" name="Test Number Conversion" source="/app/tests/test_number_conversion.robot">
+<test id="s1-s1-t1" name="Test Number To Words" line="6">
+<kw name="Convert Number To Words" owner="number_conversion_keywords">
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2025-08-29T01:14:57.086391" level="INFO">${body} = &lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/"&gt;
+&lt;soapenv:Header/&gt;
+&lt;soapenv:Body&gt;
+&lt;web:NumberToWords&gt;
+&lt;web:ubiNum&gt;5...</msg>
+<var>${body}</var>
+<arg>SEPARATOR=\n</arg>
+<arg>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/"&gt;</arg>
+<arg>&lt;soapenv:Header/&gt;</arg>
+<arg>&lt;soapenv:Body&gt;</arg>
+<arg>&lt;web:NumberToWords&gt;</arg>
+<arg>&lt;web:ubiNum&gt;${number}&lt;/web:ubiNum&gt;</arg>
+<arg>&lt;/web:NumberToWords&gt;</arg>
+<arg>&lt;/soapenv:Body&gt;</arg>
+<arg>&lt;/soapenv:Envelope&gt;</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2025-08-29T01:14:57.085885" elapsed="0.000568"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-08-29T01:14:57.087107" level="INFO">${headers} = {'Content-Type': 'text/xml'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=text/xml</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-08-29T01:14:57.086680" elapsed="0.000472"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-08-29T01:14:57.275582" level="FAIL">ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))</msg>
+<var>${response}</var>
+<arg>${BASE_URL}</arg>
+<arg>data=${body}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request.</doc>
+<status status="FAIL" start="2025-08-29T01:14:57.087317" elapsed="0.196781">ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))</status>
+</kw>
+<return>
+<value>${response}</value>
+<status status="NOT RUN" start="2025-08-29T01:14:57.284271" elapsed="0.000045"/>
+</return>
+<var>${response}</var>
+<arg>500</arg>
+<status status="FAIL" start="2025-08-29T01:14:57.084924" elapsed="0.199585">ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))</status>
+</kw>
+<kw name="Get Element Text" owner="XML">
+<var>${result}</var>
+<arg>${response.content}</arg>
+<arg>.//m:NumberToWordsResult</arg>
+<doc>Returns all text of the element, possibly whitespace normalized.</doc>
+<status status="NOT RUN" start="2025-08-29T01:14:57.284722" elapsed="0.000098"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${result}</arg>
+<arg>five hundred</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-08-29T01:14:57.285052" elapsed="0.000032"/>
+</kw>
+<status status="FAIL" start="2025-08-29T01:14:57.083754" elapsed="0.201574">ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))</status>
+</test>
+<test id="s1-s1-t2" name="Test Number To Dollars" line="11">
+<kw name="Convert Number To Dollars" owner="number_conversion_keywords">
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2025-08-29T01:14:57.287260" level="INFO">${body} = &lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/"&gt;
+&lt;soapenv:Header/&gt;
+&lt;soapenv:Body&gt;
+&lt;web:NumberToDollars&gt;
+&lt;web:dNum&gt;1...</msg>
+<var>${body}</var>
+<arg>SEPARATOR=\n</arg>
+<arg>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/"&gt;</arg>
+<arg>&lt;soapenv:Header/&gt;</arg>
+<arg>&lt;soapenv:Body&gt;</arg>
+<arg>&lt;web:NumberToDollars&gt;</arg>
+<arg>&lt;web:dNum&gt;${number}&lt;/web:dNum&gt;.</arg>
+<arg>&lt;/web:NumberToDollars&gt;</arg>
+<arg>&lt;/soapenv:Body&gt;</arg>
+<arg>&lt;/soapenv:Envelope&gt;</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2025-08-29T01:14:57.286766" elapsed="0.000538"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-08-29T01:14:57.287727" level="INFO">${headers} = {'Content-Type': 'text/xml'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=text/xml</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-08-29T01:14:57.287492" elapsed="0.000266"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-08-29T01:14:57.478840" level="FAIL">ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))</msg>
+<var>${response}</var>
+<arg>${BASE_URL}</arg>
+<arg>data=${body}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request.</doc>
+<status status="FAIL" start="2025-08-29T01:14:57.287935" elapsed="0.193827">ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))</status>
+</kw>
+<return>
+<value>${response}</value>
+<status status="NOT RUN" start="2025-08-29T01:14:57.481946" elapsed="0.000049"/>
+</return>
+<var>${response}</var>
+<arg>123.45</arg>
+<status status="FAIL" start="2025-08-29T01:14:57.286304" elapsed="0.195878">ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))</status>
+</kw>
+<kw name="Get Element Text" owner="XML">
+<var>${result}</var>
+<arg>${response.content}</arg>
+<arg>.//m:NumberToDollarsResult</arg>
+<doc>Returns all text of the element, possibly whitespace normalized.</doc>
+<status status="NOT RUN" start="2025-08-29T01:14:57.482399" elapsed="0.000033"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${result}</arg>
+<arg>one hundred and twenty three dollars and forty five cents</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-08-29T01:14:57.482627" elapsed="0.000037"/>
+</kw>
+<status status="FAIL" start="2025-08-29T01:14:57.285690" elapsed="0.197247">ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))</status>
+</test>
+<status status="FAIL" start="2025-08-29T01:14:56.991918" elapsed="0.491577"/>
+</suite>
+<status status="FAIL" start="2025-08-29T01:14:56.950431" elapsed="0.533706"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="0" fail="2" skip="0">Tests</stat>
+<stat name="Test Number Conversion" id="s1-s1" pass="0" fail="2" skip="0">Tests.Test Number Conversion</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
